@@ -1,0 +1,72 @@
+
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param VGG=1.5
+.param LAMBDA=0.09u
+.param width_N=1.8u
+.param width_P={2.5*width_N}
+.param P=width_P
+.param N=10*width_N
+.global gnd vdd
+
+VDS high gnd 1.8
+vdd vdd gnd 1.8
+
+.subckt inv x y vdd gnd P ='a'  N = 'b'
+
+M10 y x gnd gnd CMOSN W='N' L=0.18u
++ AS={5*N*LAMBDA} PS={10*LAMBDA+2*N} AD={5*N*LAMBDA} PD={10*LAMBDA+2*N}
+M12 y x vdd vdd CMOSP W='P' L=0.18u
++ AS={5*P*LAMBDA} PS={10*LAMBDA+2*P} AD={5*P*LAMBDA} PD={10*LAMBDA+2*P}
+.ends inv
+
+.subckt dff d q x y clk vdd gnd P='a' N='b'
+M1 x d gnd gnd CMOSN W='N' L=0.18u
++ AS={5*N*LAMBDA} PS={10*LAMBDA+2*N} AD={5*N*LAMBDA} PD={10*LAMBDA+2*N}
+
+M2 x clk c1 vdd  CMOSP W='P' L=0.18u
++ AS={5*P*LAMBDA} PS={10*LAMBDA+2*P} AD={5*P*LAMBDA} PD={10*LAMBDA+2*P}
+
+M3 c1 D vdd vdd CMOSP W='P' L=0.18u
++ AS={5*P*LAMBDA} PS={10*LAMBDA+2*P} AD={5*P*LAMBDA} PD={10*LAMBDA+2*P}
+
+M4 c2 clk gnd gnd CMOSN W='N' L=0.18u
++ AS={5*N*LAMBDA} PS={10*LAMBDA+2*N} AD={5*N*LAMBDA} PD={10*LAMBDA+2*N}
+
+M5 y x c2 gnd CMOSN W='N' L=0.18u
++ AS={5*N*LAMBDA} PS={10*LAMBDA+2*N} AD={5*N*LAMBDA} PD={10*LAMBDA+2*N}
+
+M6 y clk vdd vdd CMOSP W='P' L=0.18u
++ AS={5*P*LAMBDA} PS={10*LAMBDA+2*P} AD={5*P*LAMBDA} PD={10*LAMBDA+2*P}
+
+M7 c3 y gnd gnd CMOSN W='N' L=0.18u
++ AS={5*N*LAMBDA} PS={10*LAMBDA+2*N} AD={5*N*LAMBDA} PD={10*LAMBDA+2*N}
+
+M8 qb clk c3 gnd CMOSN W='N' L=0.18u
++ AS={5*N*LAMBDA} PS={10*LAMBDA+2*N} AD={5*N*LAMBDA} PD={10*LAMBDA+2*N}
+
+M9 qb y vdd vdd CMOSP W='P' L=0.18u
++ AS={5*P*LAMBDA} PS={10*LAMBDA+2*P} AD={5*P*LAMBDA} PD={10*LAMBDA+2*P}
+
+x1 qb q vdd gnd inv P='P' N='N'
+.ends
+
+v1 d gnd PULSE(0 1.8 0.01n 0 0 30n 60n)
+v2 clk gnd PULSE(0 1.8 0 0 0 20n 40n)
+
+x1 d q x y clk vdd gnd dff P='width_P' N='width_N' 
+
+.tran 1n 400n
+.measure tran tpcq 
++TRIG v(q) VAL='SUPPLY/2' RISE=1;
++TARG v(clk) VAL='SUPPLY/2' RISE=1;
+
+.control
+set hcopypscolor = 1 *White background for saving plots
+set color0=white ** color0 is used to set the background of the plot (manual sec:17.7))
+set color1=blue ** color1 is used to set the grid color of the plot (manual sec:17.7))
+
+run
+set curplottitle="bhargav-2023112014"
+plot v(q) 3+v(d) 6+v(clk)
+.endc

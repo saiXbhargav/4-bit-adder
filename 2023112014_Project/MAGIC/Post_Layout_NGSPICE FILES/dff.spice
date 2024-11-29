@@ -1,0 +1,76 @@
+* SPICE3 file created from dff.ext - technology: scmos
+
+.option scale=0.09u
+
+M1000 a_n20_n2# d vdd w_n33_n8# pfet w=25 l=2
++  ad=150 pd=62 as=500 ps=240
+M1001 a_n24_n34# d gnd Gnd nfet w=10 l=2
++  ad=50 pd=30 as=200 ps=120
+M1002 y a_62_n2# vdd w_94_n8# pfet w=25 l=2
++  ad=125 pd=60 as=0 ps=0
+M1003 a_62_n2# a_18_n2# vdd w_49_n8# pfet w=25 l=2
++  ad=125 pd=60 as=0 ps=0
+M1004 a_56_n34# a_18_n2# gnd Gnd nfet w=10 l=2
++  ad=60 pd=32 as=0 ps=0
+M1005 a_18_n2# a_n24_n34# a_12_n34# Gnd nfet w=10 l=2
++  ad=50 pd=30 as=60 ps=32
+M1006 a_12_n34# clk gnd Gnd nfet w=10 l=2
++  ad=0 pd=0 as=0 ps=0
+M1007 a_62_n2# clk a_56_n34# Gnd nfet w=10 l=2
++  ad=50 pd=30 as=0 ps=0
+M1008 a_n24_n34# clk a_n20_n2# w_n33_n8# pfet w=25 l=2
++  ad=125 pd=60 as=0 ps=0
+M1009 a_18_n2# clk vdd w_5_n8# pfet w=25 l=2
++  ad=125 pd=60 as=0 ps=0
+M1010 y a_62_n2# gnd Gnd nfet w=10 l=2
++  ad=50 pd=30 as=0 ps=0
+C0 a_56_n34# a_62_n2# 0.10fF
+C1 a_62_n2# w_94_n8# 0.06fF
+C2 a_12_n34# gnd 0.14fF
+C3 w_5_n8# a_18_n2# 0.09fF
+C4 y w_94_n8# 0.05fF
+C5 a_62_n2# y 0.07fF
+C6 w_n33_n8# clk 0.06fF
+C7 clk d 0.21fF
+C8 vdd w_49_n8# 0.07fF
+C9 w_n33_n8# d 0.06fF
+C10 a_n24_n34# clk 0.41fF
+C11 gnd clk 0.29fF
+C12 w_n33_n8# vdd 0.08fF
+C13 w_n33_n8# a_n24_n34# 0.25fF
+C14 w_5_n8# clk 0.06fF
+C15 a_n24_n34# vdd 0.20fF
+C16 a_12_n34# a_18_n2# 0.10fF
+C17 a_n24_n34# gnd 0.24fF
+C18 vdd w_5_n8# 0.07fF
+C19 a_62_n2# w_49_n8# 0.09fF
+C20 a_62_n2# clk 0.36fF
+C21 a_n24_n34# w_5_n8# 0.13fF
+C22 vdd w_94_n8# 0.07fF
+C23 a_56_n34# gnd 0.14fF
+C24 w_n33_n8# a_n20_n2# 0.01fF
+C25 a_62_n2# vdd 0.37fF
+C26 w_49_n8# a_18_n2# 0.06fF
+C27 clk a_18_n2# 0.05fF
+C28 a_n20_n2# vdd 0.29fF
+C29 a_62_n2# gnd 0.12fF
+C30 vdd y 0.29fF
+C31 a_n20_n2# a_n24_n34# 0.26fF
+C32 y gnd 0.14fF
+C33 vdd a_18_n2# 0.37fF
+C34 a_n24_n34# a_18_n2# 0.51fF
+C35 gnd a_18_n2# 0.18fF
+C36 a_56_n34# Gnd 0.01fF
+C37 a_12_n34# Gnd 0.01fF
+C38 gnd Gnd 0.08fF
+C39 y Gnd 0.10fF
+C40 a_n24_n34# Gnd 0.04fF
+C41 vdd Gnd 0.04fF
+C42 a_62_n2# Gnd 0.44fF
+C43 a_18_n2# Gnd 0.48fF
+C44 clk Gnd 0.44fF
+C45 d Gnd 0.22fF
+C46 w_94_n8# Gnd 0.97fF
+C47 w_49_n8# Gnd 0.97fF
+C48 w_5_n8# Gnd 0.97fF
+C49 w_n33_n8# Gnd 0.67fF
